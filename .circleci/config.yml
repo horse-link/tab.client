@@ -7,11 +7,17 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Restore
+          command: dotnet restore
+          working_directory: tab.client
+      - run:
           name: Build
           command: dotnet build
+          working_directory: tab.client
       - run:
           name: Test
           command: dotnet test
+          working_directory: tab.client.test
 
 workflows:
   build-and-test:
