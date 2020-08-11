@@ -1,37 +1,24 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using tab.client.Models.Bet;
 
 namespace tab.client.Models.Betslip
 {
-    public class ClientDetails 
+    public class Authentication
     {
-        public string channel { get; set; } 
-        
-        public string jurisdiction { get; set; } 
+        public string token { get; set; }
+        public DateTime inactivityExpiry { get; set; }
+        public DateTime absoluteExpiry { get; set; }
     }
-
-    // public class Leg 
-    // {
-    //     public string type { get; set; } 
-    //     public int propositionId { get; set; } 
-    //     public string odds { get; set; } 
-    // }
-
-    // public class Bet 
-    // {
-    //     public string type { get; set; } 
-    //     public string stake { get; set; } 
-    //     public List<Leg> legs { get; set; } 
-    //     public bool enableMultiplier { get; set; } 
-    //     public string source { get; set; } 
-    // }
 
     public class Response 
     {
-        public string uuid { get; set; } 
-        public string clientVersion { get; set; } 
-        public ClientDetails clientDetails { get; set; } 
-        public List<Bet> bets { get; set; } 
+        public DateTime updatedTime { get; set; } 
+        public string ticketCost { get; set; } 
+        public List<object> errors { get; set; } 
+        public int accountNumber { get; set; } 
+        public List<Bet.Bet> bets { get; set; } 
+        public Authentication authentication { get; set; } 
     }
 }

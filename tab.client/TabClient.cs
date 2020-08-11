@@ -59,10 +59,15 @@ namespace tab.client
                 };
 
                 const String url = "https://webapi.tab.com.au/v1/account-service/tab/authenticate";
-                String slackJson = JsonConvert.SerializeObject(request);
-                StringContent content = new StringContent(slackJson, UnicodeEncoding.UTF8, "application/json");
+                String jsonRequest = JsonConvert.SerializeObject(request);
+                StringContent content = new StringContent(jsonRequest, UnicodeEncoding.UTF8, "application/json");
 
                 var result = await client.PostAsync(url, content);
+                var json = await result.Content.ReadAsStringAsync();
+
+                var response = JsonConvert.DeserializeObject<Models.Authentication.Response>(json);
+
+                this.Token = response.authentication.token;
             }
         }
 
@@ -92,13 +97,6 @@ namespace tab.client
                 var json = await response.Content.ReadAsStringAsync();
 
                 var meetingResponse = JsonConvert.DeserializeObject<Models.Meeting.Response>(json);
-
-                // List<Meet> meetings = new List<Meet>();
-                // foreach(Models.TAB.Meeting meeting in meetingResponse.Meetings)
-                // {
-                //     meetings.Add(new Meet() { Location = meeting.Location, Name = meeting.MeetingName });
-                // }
-
                 return meetingResponse.Meetings;
             }
         }
