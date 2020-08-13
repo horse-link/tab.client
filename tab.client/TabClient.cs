@@ -8,7 +8,7 @@ using tab.client.Models.Race;
 
 namespace tab.client
 {
-    public class TabClient : IHorseRaceClient
+    public class TabClient : IHorseRaceClient, IAuthenticationClient
     {
         private readonly Guid _transactionID;
 
@@ -20,10 +20,6 @@ namespace tab.client
 
         private readonly string _jurisdiction = "QLD";
 
-        private readonly string _username;
-
-        private readonly string _password;
-
         public TabClient()
         {
         }
@@ -33,26 +29,20 @@ namespace tab.client
             Token = token;
         }
 
-        // public TabClient(Guid transactionID, String token)
-        // {
-        //     _transactionID = transactionID;
-        //     Token = token;
-        // }
-
-        public TabClient(Int32 accountNumber, String password)
+        public TabClient(Guid transactionID, String token)
         {
-            AccountNumber = accountNumber;
-            _password = password;
+            _transactionID = transactionID;
+            Token = token;
         }
 
-        public async Task Authenticate()
+        public async Task Authenticate(Int32 accountNumber, String password)
         {
             using (HttpClient client = new HttpClient())
             {
                 tab.client.Models.Authentication.Request request = new Models.Authentication.Request()
                 {
-                    accountNumber = AccountNumber,
-                    password = _password,
+                    accountNumber = accountNumber,
+                    password = password,
                     tmxSession = Guid.NewGuid(),
                     channel = "TABCOMAU",
                     extendedTokenLifeTime = true
@@ -101,25 +91,18 @@ namespace tab.client
             }
         }
 
-        public async Task GetRaces(DateTime date, string location)
+        public async Task GetRace(DateTime date, string location, Int32 racenumber)
         {
             //WHERE LOCATION IS NMONIC
             
             using (HttpClient client = new HttpClient())
             {
-                String url = String.Format("https://api.beta.tab.com.au/v1/tab-info-service/racing/dates/{0:yyyy-MM-dd}/meetings/R/{1}/races/1?returnPromo=false&returnOffers=false&jurisdiction=QLD", date, location);
+                String url = String.Format("https://api.beta.tab.com.au/v1/tab-info-service/racing/dates/{0:yyyy-MM-dd}/meetings/R/{1}/races/{2}?returnPromo=false&returnOffers=false&jurisdiction=QLD", date, location, racenumber);
                 var response = await client.GetAsync(url);
                 var json = await response.Content.ReadAsStringAsync();
 
                 var raceResponse = JsonConvert.DeserializeObject<Models.Race.Response>(json);
-
-                // List<Meet> meetings = new List<Meet>();
-                // foreach(Models.TAB.Meeting meeting in meetingResponse.Meetings)
-                // {
-                //     meetings.Add(new Meet() { Location = meeting.Location, Name = meeting.MeetingName });
-                // }
-
-                // return meetings;
+                return raceResponse;
             }
         }
 
@@ -135,13 +118,6 @@ namespace tab.client
                 var json = await response.Content.ReadAsStringAsync();
 
                 var raceResponse = JsonConvert.DeserializeObject<Models.Race.Response>(json);
-
-                // List<Runner> runners = new List<Runner>();
-                // foreach(Models.TAB.Race.Runner runner in raceResponse.runners)
-                // {
-                //     runners.Add(new Runner() { Name = runner.runnerName, Number = runner.runnerNumber, Barrier = runner.barrierNumber});
-                // }
-
                 return raceResponse.runners;
             }
         }

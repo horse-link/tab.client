@@ -9,8 +9,8 @@ namespace tab.client.tests
         [Fact]
         public async Task Should_Auth()
         {
-            TabClient client = new TabClient(1, "");
-            await client.Authenticate();
+            IAuthenticationClient client = new TabClient();
+            await client.Authenticate(0, "");
 
             Assert.NotNull(client.Token);
         }
@@ -18,6 +18,15 @@ namespace tab.client.tests
 
         [Fact]
         public async Task Should_Get_Todays_Meets()
+        {
+            TabClient client = new TabClient();
+            var actual = await client.GetMeets(System.DateTime.Now);
+
+            Assert.NotNull(actual);
+        }
+
+        [Fact]
+        public async Task Should_Get_Meets_Races()
         {
             TabClient client = new TabClient();
             var actual = await client.GetMeets(System.DateTime.Now);
