@@ -91,33 +91,46 @@ namespace tab.client
             }
         }
 
-        public async Task GetRace(DateTime date, string location, Int32 racenumber)
+        public async Task<Models.Race.Response> GetTodaysRaces()
         {
             //WHERE LOCATION IS NMONIC
-            
+            using (HttpClient client = new HttpClient())
+            {
+                //https://api.beta.tab.com.au/v1/tab-info-service/racing/next-to-go/races?includeFixedOdds=true&returnPromo=false&returnOffers=false&jurisdiction=QLD
+                String url = "https://api.beta.tab.com.au/v1/tab-info-service/racing/next-to-go/races?includeFixedOdds=true&returnPromo=false&returnOffers=false&jurisdiction=QLD";
+                var response = await client.GetAsync(url);
+                var json = await response.Content.ReadAsStringAsync();
+
+                Models.Race.Response racesResponse = JsonConvert.DeserializeObject<Models.Race.Response>(json);
+                return racesResponse;
+            }
+        }
+
+        public async Task<Models.Race.Response> GetRace(DateTime date, String location, Int32 racenumber)
+        {
+            //WHERE LOCATION IS MNEMONIC
             using (HttpClient client = new HttpClient())
             {
                 String url = String.Format("https://api.beta.tab.com.au/v1/tab-info-service/racing/dates/{0:yyyy-MM-dd}/meetings/R/{1}/races/{2}?returnPromo=false&returnOffers=false&jurisdiction=QLD", date, location, racenumber);
                 var response = await client.GetAsync(url);
                 var json = await response.Content.ReadAsStringAsync();
 
-                var raceResponse = JsonConvert.DeserializeObject<Models.Race.Response>(json);
+                Models.Race.Response raceResponse = JsonConvert.DeserializeObject<Models.Race.Response>(json);
                 return raceResponse;
             }
         }
 
-
-        public async Task<List<Runner>> GetRunners(DateTime date, string location, int number)
+        public async Task<List<Models.Race.Runner>> GetRunners(DateTime date, string location, int number)
         {
             //WHERE LOCATION IS MNEMONIC
-            
             using (HttpClient client = new HttpClient())
             {
                 String url = String.Format("https://api.beta.tab.com.au/v1/tab-info-service/racing/dates/{0:yyyy-MM-dd}/meetings/R/{1}/races/{2}?returnPromo=false&returnOffers=false&jurisdiction=QLD", date, location, number);
                 var response = await client.GetAsync(url);
                 var json = await response.Content.ReadAsStringAsync();
 
-                var raceResponse = JsonConvert.DeserializeObject<Models.Race.Response>(json);
+                var raceResponse = JsonConvert.DeserializeObject<Models.Race.Race>(json);
+                
                 return raceResponse.runners;
             }
         }

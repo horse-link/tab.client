@@ -6,7 +6,7 @@ namespace tab.client
 {
     public interface IHorseRaceClient
     {
-        //Task<IEnumerable<Models.Racing.Meet>> GetMeets(DateTime date);
+        Task<IEnumerable<Models.Meeting.Meeting>> GetMeets(DateTime date);
 
         //Task GetRaces(DateTime date, String location);
     }

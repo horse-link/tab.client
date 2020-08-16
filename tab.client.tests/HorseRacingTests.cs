@@ -26,10 +26,10 @@ namespace tab.client.tests
         }
 
         [Fact]
-        public async Task Should_Get_Meets_Races()
+        public async Task Should_Get_Todays_Races()
         {
             TabClient client = new TabClient();
-            var actual = await client.GetMeets(System.DateTime.Now);
+            var actual = await client.GetTodaysRaces();
 
             Assert.NotNull(actual);
         }

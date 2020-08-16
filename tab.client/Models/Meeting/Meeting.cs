@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace tab.client.Models.Meeting
@@ -31,6 +32,9 @@ namespace tab.client.Models.Meeting
 
         [JsonProperty("sellCode")]
         public SellCode SellCode { get; set; }
+
+        [JsonProperty("races")]
+        public List<Race.Race> Races { get; set; }
     }
 
     public class SellCode

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 
 namespace tab.client.Models.Meeting
 {
+    [Obsolete]
     public class Runner
     {
         [JsonProperty(PropertyName = "runnerName")]
