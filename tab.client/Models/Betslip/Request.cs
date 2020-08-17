@@ -7,26 +7,12 @@ namespace tab.client.Models.Betslip
 {
     public class ClientDetails 
     {
-        public string channel { get; set; } 
+        [JsonProperty("channel")]
+        public string Channel { get; set; } 
         
-        public string jurisdiction { get; set; } 
+        [JsonProperty("jurisdiction")]
+        public string Jurisdiction { get; set; } 
     }
-
-    // public class Leg 
-    // {
-    //     public string type { get; set; } 
-    //     public int propositionId { get; set; } 
-    //     public string odds { get; set; } 
-    // }
-
-    // public class Bet 
-    // {
-    //     public string type { get; set; } 
-    //     public string stake { get; set; } 
-    //     public List<Leg> legs { get; set; } 
-    //     public bool enableMultiplier { get; set; } 
-    //     public string source { get; set; } 
-    // }
 
     public class Request 
     {

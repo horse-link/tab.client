@@ -5,6 +5,7 @@ namespace tab.client
 {
     public interface IBetClient
     {
+        
         Task Excute(Decimal amount);
     }
 }
