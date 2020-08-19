@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using tab.client.Models.Bet;
 
 namespace tab.client.Models.Betslip
 {
@@ -18,7 +17,7 @@ namespace tab.client.Models.Betslip
         public string ticketCost { get; set; } 
         public List<object> errors { get; set; } 
         public int accountNumber { get; set; } 
-        public List<Bet.Bet> bets { get; set; } 
+        public List<tab.client.Models.BetEnquiry.Bet> bets { get; set; } 
         public Authentication authentication { get; set; } 
     }
 }
