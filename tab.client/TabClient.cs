@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using tab.client.Models.Race;
+using System.Linq;
 
 namespace tab.client
 {
-    public class TabClient : IHorseRaceClient, IAuthenticationClient
+    public class TabClient : IHorseRaceClient, IAuthenticationClient, IDisposable
     {
         private readonly Guid _transactionID;
 
@@ -19,6 +20,8 @@ namespace tab.client
         public String CustomerNumber { get; private set; }
 
         private readonly string _jurisdiction = "QLD";
+
+        private HttpClient _client = new HttpClient();
 
         public TabClient()
         {
@@ -113,7 +116,7 @@ namespace tab.client
                 var json = await response.Content.ReadAsStringAsync();
 
                 var meetingResponse = JsonConvert.DeserializeObject<Models.Meeting.Response>(json);
-                return meetingResponse.Meetings;
+                return meetingResponse.Meetings.Where(x => x.RaceType == "R");
             }
         }
 
@@ -122,8 +125,7 @@ namespace tab.client
             //WHERE LOCATION IS NMONIC
             using (HttpClient client = new HttpClient())
             {
-                //https://api.beta.tab.com.au/v1/tab-info-service/racing/next-to-go/races?includeFixedOdds=true&returnPromo=false&returnOffers=false&jurisdiction=QLD
-                String url = "https://api.beta.tab.com.au/v1/tab-info-service/racing/next-to-go/races?includeFixedOdds=true&returnPromo=false&returnOffers=false&jurisdiction=QLD";
+                String url = String.Format("https://api.beta.tab.com.au/v1/tab-info-service/racing/next-to-go/races?includeFixedOdds=true&returnPromo=false&returnOffers=false&jurisdiction={0}", _jurisdiction);
                 var response = await client.GetAsync(url);
                 var json = await response.Content.ReadAsStringAsync();
 
@@ -137,7 +139,7 @@ namespace tab.client
             //WHERE LOCATION IS MNEMONIC
             using (HttpClient client = new HttpClient())
             {
-                String url = String.Format("https://api.beta.tab.com.au/v1/tab-info-service/racing/dates/{0:yyyy-MM-dd}/meetings/R/{1}/races/{2}?returnPromo=false&returnOffers=false&jurisdiction=QLD", date, location, racenumber);
+                String url = String.Format("https://api.beta.tab.com.au/v1/tab-info-service/racing/dates/{0:yyyy-MM-dd}/meetings/R/{1}/races/{2}?returnPromo=false&returnOffers=false&jurisdiction={3}", date, location, racenumber, _jurisdiction);
                 var response = await client.GetAsync(url);
                 var json = await response.Content.ReadAsStringAsync();
 
@@ -159,6 +161,11 @@ namespace tab.client
                 
                 return raceResponse.runners;
             }
+        }
+
+        public void Dispose()
+        {
+            _client.Dispose();
         }
     }
 }

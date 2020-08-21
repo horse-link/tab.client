@@ -72,14 +72,6 @@ namespace tab.client.Models.Authentication
         public DepositLimit depositLimit { get; set; } 
     }
 
-    public class Authentication 
-    {
-        public string token { get; set; } 
-        public DateTime inactivityExpiry { get; set; } 
-        public DateTime absoluteExpiry { get; set; } 
-        public List<string> scopes { get; set; } 
-    }
-
     public class Response 
     {
         public int accountNumber { get; set; } 
@@ -100,6 +92,6 @@ namespace tab.client.Models.Authentication
         public bool pinSet { get; set; } 
         public DateTime lastAuthenticateTimestamp { get; set; } 
         public string verificationStatus { get; set; } 
-        public Authentication authentication { get; set; } 
+        public tab.client.Models.Common.Authentication authentication { get; set; } 
     }
 }
