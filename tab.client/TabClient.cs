@@ -122,7 +122,7 @@ namespace tab.client
             }
         }
 
-        public async Task<List<Models.Race.Runner>> GetRunners(DateTime date, string location, int number)
+        public async Task<List<Models.Runner.Runner>> GetRunners(DateTime date, string location, int number)
         {
             //WHERE LOCATION IS MNEMONIC
             using (HttpClient client = new HttpClient())
@@ -131,9 +131,9 @@ namespace tab.client
                 var response = await client.GetAsync(url);
                 var json = await response.Content.ReadAsStringAsync();
 
-                var raceResponse = JsonConvert.DeserializeObject<Models.Race.Race>(json);
+                var runnerResponse = JsonConvert.DeserializeObject<Models.Runner.Response>(json);
                 
-                return raceResponse.runners;
+                return runnerResponse.runners;
             }
         }
 

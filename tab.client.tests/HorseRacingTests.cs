@@ -33,5 +33,14 @@ namespace tab.client.tests
 
             Assert.NotNull(actual);
         }
+
+        [Fact]
+        public async Task Should_Get_Race_Runners()
+        {
+            TabClient client = new TabClient();
+            var actual = await client.GetRunners(DateTime.Now, "DBN", 1);
+
+            Assert.NotNull(actual);
+        }
     }
 }
