@@ -78,6 +78,32 @@ namespace tab.client
             }
         }
 
+        public async Task Enquire(List<Models.Authentication.Betting> bets)
+        {
+            if (String.IsNullOrEmpty(Token))
+            {
+                throw new ArgumentNullException("Token must be set.");
+            }
+
+            using (HttpClient client = new HttpClient())
+            {
+                String url = String.Format("https://webapi.tab.com.au/v1/tab-betting-service/accounts/{0}/betslip-enquiry?TabcorpAuth={1}", AccountNumber, Token);
+                
+                using (var content = new StringContent(JsonConvert.SerializeObject(bets), System.Text.Encoding.UTF8, "application/json"))
+                {
+                    var response = await client.PostAsync(url, content);
+                    var json = await response.Content.ReadAsStringAsync();
+
+
+                    // List<Meet> meetings = new List<Meet>();
+                    // foreach(Models.TAB.Meeting meeting in meetingResponse.Meetings)
+                    // {
+                    //     meetings.Add(new Meet() { Location = meeting.Location, Name = meeting.MeetingName });
+                    // }
+                }
+            }
+        }
+
         public async Task<IEnumerable<Models.Meeting.Meeting>> GetMeets(DateTime date)
         {
             using (HttpClient client = new HttpClient())
