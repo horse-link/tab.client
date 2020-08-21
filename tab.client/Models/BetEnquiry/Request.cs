@@ -16,15 +16,6 @@ namespace tab.client.Models.BetEnquiry
         public string Odds { get; set; }
     }
 
-    public class ClientDetails
-    {
-        [JsonProperty("channel")]
-        public string Channel { get; set; }
-
-        [JsonProperty("jurisdiction")]
-        public string Jurisdiction { get; set; }
-    }
-
     public class Bet
     {
         [JsonProperty("type")]
@@ -52,7 +43,7 @@ namespace tab.client.Models.BetEnquiry
         public String ClientVersion { get; set; }
 
         [JsonProperty("clientDetails")]
-        public ClientDetails ClientDetails { get; set; }
+        public tab.client.Models.Common.ClientDetails ClientDetails { get; set; }
 
         [JsonProperty("bets")]
         public Bet[] Bets { get; set; }
@@ -62,7 +53,7 @@ namespace tab.client.Models.BetEnquiry
             Uuid = Guid.NewGuid();
             ClientVersion = "1";
 
-            ClientDetails = new ClientDetails()
+            ClientDetails = new tab.client.Models.Common.ClientDetails()
             {
                 Channel = "TABCOMAU",
                 Jurisdiction = "QLD"
