@@ -150,16 +150,24 @@ namespace tab.client
 
         public async Task<List<Models.Runner.Runner>> GetRunners(DateTime date, string location, int number)
         {
-            //WHERE LOCATION IS MNEMONIC
-            using (HttpClient client = new HttpClient())
+            try
             {
-                String url = String.Format("https://api.beta.tab.com.au/v1/tab-info-service/racing/dates/{0:yyyy-MM-dd}/meetings/R/{1}/races/{2}?returnPromo=false&returnOffers=false&jurisdiction=QLD", date, location, number);
-                var response = await client.GetAsync(url);
-                var json = await response.Content.ReadAsStringAsync();
+                //WHERE LOCATION IS MNEMONIC
+                using (HttpClient client = new HttpClient())
+                {
+                    String url = String.Format("https://api.beta.tab.com.au/v1/tab-info-service/racing/dates/{0:yyyy-MM-dd}/meetings/R/{1}/races/{2}?returnPromo=false&returnOffers=false&jurisdiction=QLD", date, location, number);
+                    var response = await client.GetAsync(url);
+                    var json = await response.Content.ReadAsStringAsync();
 
-                var runnerResponse = JsonConvert.DeserializeObject<Models.Runner.Response>(json);
-                
-                return runnerResponse.runners;
+                    var runnerResponse = JsonConvert.DeserializeObject<Models.Runner.Response>(json);
+                    
+                    return runnerResponse.runners;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
             }
         }
 

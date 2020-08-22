@@ -94,7 +94,7 @@ namespace tab.client.Models.Race
     {
         public double ReturnWin { get; set; } 
         public DateTime ReturnWinTime { get; set; } 
-        public int ReturnWinOpen { get; set; } 
+        public double ReturnWinOpen { get; set; } 
         public double ReturnWinOpenDaily { get; set; } 
         public double ReturnPlace { get; set; } 
         public bool IsFavouriteWin { get; set; } 
@@ -102,10 +102,10 @@ namespace tab.client.Models.Race
         public string BettingStatus { get; set; } 
         public int PropositionNumber { get; set; } 
         public object Differential { get; set; } 
-        public int PercentageChange { get; set; } 
+        public double PercentageChange { get; set; } 
         public bool AllowPlace { get; set; } 
-        public int WinDeduction { get; set; } 
-        public int PlaceDeduction { get; set; } 
+        public double WinDeduction { get; set; } 
+        public double PlaceDeduction { get; set; } 
         public DateTime ScratchedTime { get; set; } 
         //public List<Fluc> flucs { get; set; } 
     }
