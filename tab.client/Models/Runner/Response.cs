@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using tab.client.Models.Race;
 
 namespace tab.client.Models.Runner
 {
@@ -26,8 +27,8 @@ namespace tab.client.Models.Runner
         [JsonProperty(PropertyName = "silkUrl")]
         public String SilkUrl { get; set; }
 
-        // [JsonProperty(PropertyName = "fixedOdds")]
-        // public Odds FixedOdds { get; set; }
+        [JsonProperty(PropertyName = "fixedOdds")]
+        public Odds FixedOdds { get; set; }
 
         // public Parimutuel parimutuel { get; set; } 
         public string trainerName { get; set; } 

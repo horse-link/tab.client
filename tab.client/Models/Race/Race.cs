@@ -89,6 +89,7 @@ namespace tab.client.Models.Race
         //public Links2 _links { get; set; } 
     }
 
+    [Obsolete("Use common")]
     public class Odds 
     {
         public double ReturnWin { get; set; } 
