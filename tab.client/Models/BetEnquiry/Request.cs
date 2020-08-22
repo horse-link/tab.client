@@ -46,7 +46,7 @@ namespace tab.client.Models.BetEnquiry
         public tab.client.Models.Common.ClientDetails ClientDetails { get; set; }
 
         [JsonProperty("bets")]
-        public Bet[] Bets { get; set; }
+        public List<Bet> Bets { get; set; }
 
         public Request()
         {
