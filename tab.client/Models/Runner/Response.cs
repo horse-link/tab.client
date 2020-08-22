@@ -15,7 +15,7 @@ namespace tab.client.Models.Runner
         public List<Runner> runners { get; set; } 
     }
 
-
+    [Obsolete("Use common")]
     public class Runner
     {
         [JsonProperty(PropertyName = "runnerName")]

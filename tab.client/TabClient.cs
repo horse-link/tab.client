@@ -148,7 +148,7 @@ namespace tab.client
             }
         }
 
-        public async Task<List<Models.Runner.Runner>> GetRunners(DateTime date, string location, int number)
+        public async Task<Models.Runner.Response> GetRunners(DateTime date, string location, int number)
         {
             try
             {
@@ -161,7 +161,7 @@ namespace tab.client
 
                     var runnerResponse = JsonConvert.DeserializeObject<Models.Runner.Response>(json);
                     
-                    return runnerResponse.runners;
+                    return runnerResponse;
                 }
             }
             catch (Exception ex)

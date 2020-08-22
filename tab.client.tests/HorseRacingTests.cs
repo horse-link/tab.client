@@ -38,7 +38,7 @@ namespace tab.client.tests
         public async Task Should_Get_Race_Runners()
         {
             TabClient client = new TabClient();
-            var actual = await client.GetRunners(DateTime.Now, "DBN", 1);
+            var actual = await client.GetRunners(DateTime.Now, "DBN", 8);
 
             Assert.NotNull(actual);
         }
