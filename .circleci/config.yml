@@ -1,0 +1,25 @@
+version: 2.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: mcr.microsoft.com/dotnet/core/sdk:3.1
+    steps:
+      - checkout
+      - run:
+          name: Restore
+          command: dotnet restore
+          working_directory: tab.client
+      - run:
+          name: Build
+          command: dotnet build
+          working_directory: tab.client
+      - run:
+          name: Test
+          command: dotnet test
+          working_directory: tab.client.test
+
+workflows:
+  build-and-test:
+    jobs:
+      - build-and-test
