@@ -7,6 +7,6 @@ namespace tab.client.Models.Meeting
     public class RacingResult
     {
         [JsonProperty(PropertyName = "runners")]
-        public List<Runner> Runners { get; set; }
+        public List<Common.Runner> Runners { get; set; }
     }
 }

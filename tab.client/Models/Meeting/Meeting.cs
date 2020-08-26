@@ -34,7 +34,7 @@ namespace tab.client.Models.Meeting
         public SellCode SellCode { get; set; }
 
         [JsonProperty("races")]
-        public List<Race.Race> Races { get; set; }
+        public List<Common.Race> Races { get; set; }
     }
 
     public class SellCode

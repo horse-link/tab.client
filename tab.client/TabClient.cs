@@ -45,9 +45,9 @@ namespace tab.client
                 tab.client.Models.Authentication.Request request = new Models.Authentication.Request()
                 {
                     accountNumber = accountNumber,
-                    password = password,
+                    Password = password,
                     tmxSession = Guid.NewGuid(),
-                    channel = "TABCOMAU",
+                    Channel = "TABCOMAU",
                     extendedTokenLifeTime = true
                 };
 

@@ -6,11 +6,14 @@ namespace tab.client.Models.Authentication
 {
     public class Request 
     {
-        public string password { get; set; } 
-        public string channel { get; set; } 
-        public Guid tmxSession { get; set; } 
-        public List<string> scopes { get; set; } 
-        public bool extendedTokenLifeTime { get; set; } 
-        public int accountNumber { get; set; } 
+        [JsonProperty("password")]
+        public string Password { get; set; } 
+
+        [JsonProperty("channel")]
+        public string Channel { get; set; }
+        public Guid tmxSession { get; set; }
+        public List<string> scopes { get; set; }
+        public bool extendedTokenLifeTime { get; set; }
+        public int accountNumber { get; set; }
     }    
 }

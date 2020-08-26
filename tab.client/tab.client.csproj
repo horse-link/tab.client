@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackageId>Tab.Client</PackageId>
-    <Version>1.0.6</Version>
+    <Version>1.0.7</Version>
     <Authors>Lucas Cullen</Authors>
     <Company>Bitcoin Brisbane</Company>
-    <PackageVersion>1.0.6</PackageVersion>
+    <PackageVersion>1.0.7</PackageVersion>
     <Title>TAB API Client</Title>
     <PackageProjectUrl>https://github.com/bitcoinbrisbane/tab.client/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/getpaidinbitcoin/tab.client</RepositoryUrl>

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace tab.client.Models.Race
+namespace tab.client.Models.Common
 {
     public class Race 
     {
@@ -44,70 +44,6 @@ namespace tab.client.Models.Race
         // public List<Rating> ratings { get; set; } 
         // public List<object> multiLegApproximates { get; set; } 
         // public List<BetType> betTypes { get; set; } 
-    }
-
-    public class BetType 
-    {
-        public string wageringProduct { get; set; } 
-        //public FirstLeg firstLeg { get; set; } 
-    }
-
-    public class Runner
-    {
-        [JsonProperty(PropertyName = "runnerName")]
-        public String Name { get; set; }
-
-        [JsonProperty(PropertyName = "runnerNumber")]
-        public Int32 Number { get; set; }
-
-        [JsonProperty(PropertyName = "silkUrl")]
-        public String SilkUrl { get; set; }
-
-        [JsonProperty(PropertyName = "fixedOdds")]
-        public Odds FixedOdds { get; set; }
-
-        public Parimutuel parimutuel { get; set; } 
-        public string trainerName { get; set; } 
-        public bool vacantBox { get; set; } 
-        public string trainerFullName { get; set; } 
-        public Int16 barrierNumber { get; set; } 
-        public string riderDriverName { get; set; } 
-        public string riderDriverFullName { get; set; } 
-        public double handicapWeight { get; set; } 
-        public object harnessHandicap { get; set; } 
-        public bool blinkers { get; set; } 
-        public int claimAmount { get; set; } 
-        public string last5Starts { get; set; } 
-        public string tcdwIndicators { get; set; } 
-        public bool emergency { get; set; } 
-        public int penalty { get; set; } 
-        public int dfsFormRating { get; set; } 
-        public int techFormRating { get; set; } 
-        public int totalRatingPoints { get; set; } 
-        public int earlySpeedRating { get; set; } 
-        public string earlySpeedRatingBand { get; set; } 
-        //public Links2 _links { get; set; } 
-    }
-
-    [Obsolete("Use common")]
-    public class Odds 
-    {
-        public double ReturnWin { get; set; } 
-        public DateTime ReturnWinTime { get; set; } 
-        public double ReturnWinOpen { get; set; } 
-        public double ReturnWinOpenDaily { get; set; } 
-        public double ReturnPlace { get; set; } 
-        public bool IsFavouriteWin { get; set; } 
-        public bool IsFavouritePlace { get; set; } 
-        public string BettingStatus { get; set; } 
-        public int PropositionNumber { get; set; } 
-        public object Differential { get; set; } 
-        public double PercentageChange { get; set; } 
-        public bool AllowPlace { get; set; } 
-        public double WinDeduction { get; set; } 
-        public double PlaceDeduction { get; set; } 
-        public DateTime ScratchedTime { get; set; } 
-        //public List<Fluc> flucs { get; set; } 
     }
 
     public class MarketMover
