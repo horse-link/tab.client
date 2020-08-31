@@ -5,6 +5,7 @@ using tab.client.Models.Race;
 
 namespace tab.client.Models.Runner
 {
+    [Obsolete]
     public class Response 
     {
         public int raceNumber { get; set; } 

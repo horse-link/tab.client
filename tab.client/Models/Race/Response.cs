@@ -47,7 +47,7 @@ namespace tab.client.Models.Race
         public bool FixedOddsOnlineBetting { get; set; }
 
         [JsonProperty("raceStartTime")]
-        public DateTimeOffset RaceStartTime { get; set; }
+        public DateTime RaceStartTime { get; set; }
 
         [JsonProperty("raceClassConditions")]
         public string RaceClassConditions { get; set; }
