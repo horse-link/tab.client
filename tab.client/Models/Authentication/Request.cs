@@ -11,9 +11,17 @@ namespace tab.client.Models.Authentication
 
         [JsonProperty("channel")]
         public string Channel { get; set; }
-        public Guid tmxSession { get; set; }
-        public List<string> scopes { get; set; }
-        public bool extendedTokenLifeTime { get; set; }
-        public int accountNumber { get; set; }
+
+        [JsonProperty("tmxSession")]
+        public Guid TmxSession { get; set; }
+
+        [JsonProperty("scopes")]
+        public List<string> Scopes { get; set; }
+
+        [JsonProperty("extendedTokenLifeTime")]
+        public bool ExtendedTokenLifeTime { get; set; }
+
+        [JsonProperty("accountNumber")]
+        public int AccountNumber { get; set; }
     }    
 }

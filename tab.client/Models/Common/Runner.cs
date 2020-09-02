@@ -28,7 +28,7 @@ namespace tab.client.Models.Common
         public double handicapWeight { get; set; } 
         public object harnessHandicap { get; set; } 
         public bool blinkers { get; set; } 
-        public int claimAmount { get; set; } 
+        public decimal claimAmount { get; set; } 
         public string last5Starts { get; set; } 
         public string tcdwIndicators { get; set; } 
         public bool emergency { get; set; } 

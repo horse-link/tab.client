@@ -40,15 +40,17 @@ namespace tab.client
 
         public async Task Authenticate(Int32 accountNumber, String password)
         {
+            this.AccountNumber = accountNumber;
+
             using (HttpClient client = new HttpClient())
             {
                 tab.client.Models.Authentication.Request request = new Models.Authentication.Request()
                 {
-                    accountNumber = accountNumber,
+                    AccountNumber = this.AccountNumber,
                     Password = password,
-                    tmxSession = Guid.NewGuid(),
+                    TmxSession = Guid.NewGuid(),
                     Channel = "TABCOMAU",
-                    extendedTokenLifeTime = true
+                    ExtendedTokenLifeTime = true
                 };
 
                 const String url = "https://webapi.tab.com.au/v1/account-service/tab/authenticate";
@@ -64,13 +66,19 @@ namespace tab.client
             }
         }
 
-        public async Task Bet()
+        public async Task Bet(IEnumerable<Models.Bet.Bet> bets)
         {
             using (HttpClient client = new HttpClient())
             {
-                String url = String.Format("https://webapi.tab.com.au/v1/tab-betting-service/accounts/{0}/betslip?TabcorpAuth={1}", AccountNumber, Token);
-                var response = await client.GetAsync(url);
-                var json = await response.Content.ReadAsStringAsync();
+                tab.client.Models.Bet.Request request = new Models.Bet.Request();
+                request.Bets.AddRange(bets);
+
+                String url = String.Format("https://webapi.tab.com.au/v1/tab-betting-service/accounts/{0}/betslip?TabcorpAuth={1}", this.AccountNumber, this.Token);
+                String jsonRequest = JsonConvert.SerializeObject(request);
+                StringContent content = new StringContent(jsonRequest, UnicodeEncoding.UTF8, "application/json");
+
+                var result = await client.PostAsync(url, content);
+                var json = await result.Content.ReadAsStringAsync();
 
 
                 // List<Meet> meetings = new List<Meet>();
