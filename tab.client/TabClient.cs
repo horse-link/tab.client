@@ -66,7 +66,7 @@ namespace tab.client
             }
         }
 
-        public async Task Bet(IEnumerable<Models.Bet.Bet> bets)
+        public async Task<Models.Bet.Response> Bet(IEnumerable<Models.Bet.Bet> bets)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -80,12 +80,8 @@ namespace tab.client
                 var result = await client.PostAsync(url, content);
                 var json = await result.Content.ReadAsStringAsync();
 
-
-                // List<Meet> meetings = new List<Meet>();
-                // foreach(Models.TAB.Meeting meeting in meetingResponse.Meetings)
-                // {
-                //     meetings.Add(new Meet() { Location = meeting.Location, Name = meeting.MeetingName });
-                // }
+                var betResponse = JsonConvert.DeserializeObject<Models.Bet.Response>(json);
+                return betResponse;
             }
         }
 
