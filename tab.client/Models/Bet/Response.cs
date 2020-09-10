@@ -13,11 +13,11 @@ namespace tab.client.Models.Bet
         public String TicketCost { get; set; } 
 
         [JsonProperty("bets")]
-        public List<Bet> Bets { get; set; }
+        public List<BetResponse> Bets { get; set; }
 
         public Response()
         {
-            Bets = new List<Bet>();
+            Bets = new List<BetResponse>();
         }
     }    
 }
