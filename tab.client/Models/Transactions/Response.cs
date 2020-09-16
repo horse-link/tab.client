@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using tab.client.Models.Common;
 using Newtonsoft.Json;
 
 namespace tab.client.Models.Transactions

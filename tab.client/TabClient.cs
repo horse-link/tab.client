@@ -175,6 +175,21 @@ namespace tab.client
             }
         }
 
+        public async Task<tab.client.Models.Transactions.Response> GetTransactions(DateTime from, DateTime to)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("TabcorpAuth", Token);
+                String url = String.Format("https://webapi.tab.com.au/v1/account-service/tab/accounts/{0}/transactional-records?fromDate={1:yyyy-MM-dd}&toDate={2:yyyy-MM-dd}", AccountNumber, from, to);
+                var response = await client.GetAsync(url);
+                var json = await response.Content.ReadAsStringAsync();
+
+                var transactionResponse = JsonConvert.DeserializeObject<tab.client.Models.Transactions.Response>(json);
+                
+                return transactionResponse;
+            }
+        }
+
         public void Dispose()
         {
             _client.Dispose();
