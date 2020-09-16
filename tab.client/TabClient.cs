@@ -15,7 +15,7 @@ namespace tab.client
 
         public String Token { get; set; }
 
-        public Int32 AccountNumber { get; private set; }
+        public Int32 AccountNumber { get; set; }
 
         public String CustomerNumber { get; private set; }
 
