@@ -124,16 +124,15 @@ namespace tab.client
             }
         }
 
-        public async Task<Models.Race.Response> GetTodaysRaces()
+        public async Task<Models.Races.Response> GetTodaysRaces()
         {
-            //WHERE LOCATION IS NMONIC
             using (HttpClient client = new HttpClient())
             {
                 String url = String.Format("https://api.beta.tab.com.au/v1/tab-info-service/racing/next-to-go/races?includeFixedOdds=true&returnPromo=false&returnOffers=false&jurisdiction={0}", _jurisdiction);
                 var response = await client.GetAsync(url);
                 var json = await response.Content.ReadAsStringAsync();
 
-                Models.Race.Response racesResponse = JsonConvert.DeserializeObject<Models.Race.Response>(json);
+                Models.Races.Response racesResponse = JsonConvert.DeserializeObject<Models.Races.Response>(json);
                 return racesResponse;
             }
         }
