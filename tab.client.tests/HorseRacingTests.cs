@@ -35,7 +35,7 @@ namespace tab.client.tests
         [Fact]
         public async Task Should_Get_Race()
         {
-            var actual = await client.GetRace(DateTime.Now, "DBN", 8);
+            var actual = await client.GetRace(DateTime.Now, "TRN", 1);
             Assert.NotNull(actual);
         }
 

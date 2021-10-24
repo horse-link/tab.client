@@ -36,13 +36,4 @@ namespace tab.client.Models.Meeting
         [JsonProperty("races")]
         public List<Common.Race> Races { get; set; }
     }
-
-    public class SellCode
-    {
-        [JsonProperty("meetingCode")]
-        public String MeetingCode { get; set; }
-
-        [JsonProperty("scheduledType")]
-        public String ScheduledType { get; set; }
-    }
 }

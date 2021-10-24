@@ -1,24 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using tab.client.Models.Race;
+using tab.client.Models.Common;
 
 namespace tab.client.Models.Race
 {
-    public class Response 
+    public class Response : BaseRace
     {
-        [JsonProperty("raceNumber")]
-        public Int32 RaceNumber { get; set; }
-
-        [JsonProperty("raceName")]
-        public string RaceName { get; set; }
-
-        [JsonProperty("raceDistance")]
-        public Int32 RaceDistance { get; set; }
-
-        [JsonProperty("trackDirection")]
-        public string TrackDirection { get; set; }
-
         [JsonProperty("hasParimutuel")]
         public bool HasParimutuel { get; set; }
 
@@ -63,9 +51,6 @@ namespace tab.client.Models.Race
 
         [JsonProperty("substitute")]
         public string Substitute { get; set; }
-
-        [JsonProperty("results")]
-        public long[][] Results { get; set; }
 
         [JsonProperty("allowMulti")]
         public bool AllowMulti { get; set; }
